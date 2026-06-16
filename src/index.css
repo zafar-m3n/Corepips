@@ -1,0 +1,50 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Instrument Serif", Georgia, serif;
+
+  --color-core-bg: #f8fafc;
+  --color-core-soft: #f1f5f9;
+  --color-core-card: #ffffff;
+  --color-core-ink: #0f172a;
+  --color-core-muted: #64748b;
+  --color-core-subtle: #94a3b8;
+  --color-core-line: #e2e8f0;
+
+  --color-core-blue: #2563eb;
+  --color-core-navy: #172554;
+  --color-core-teal: #0f766e;
+  --color-core-green: #16a34a;
+  --color-core-red: #dc2626;
+  --color-core-gold: #d97706;
+  --color-core-sky: #e0f2fe;
+  --color-core-mint: #dcfce7;
+  --color-core-amber: #fef3c7;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    background-color: var(--color-core-bg);
+    color: var(--color-core-ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  #root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
