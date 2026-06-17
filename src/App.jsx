@@ -7,6 +7,8 @@ import Markets from "./pages/Markets";
 import Analysis from "./pages/Analysis";
 import Tools from "./pages/Tools";
 import About from "./pages/About";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsAndConditions from "./pages/TermsAndConditions";
 
 export default function App() {
   return (
@@ -21,6 +23,8 @@ export default function App() {
             <Route path="/analysis" element={<Analysis />} />
             <Route path="/tools" element={<Tools />} />
             <Route path="/about" element={<About />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
           </Routes>
         </main>
         <Footer />

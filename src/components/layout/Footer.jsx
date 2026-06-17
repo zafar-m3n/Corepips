@@ -25,6 +25,11 @@ const footerLinks = {
   ],
 };
 
+const legalLinks = [
+  { label: "Privacy Policy", to: "/privacy-policy" },
+  { label: "Terms & Conditions", to: "/terms-and-conditions" },
+];
+
 export default function Footer() {
   return (
     <footer className="bg-core-navy text-white mt-auto">
@@ -39,9 +44,12 @@ export default function Footer() {
                 Core<span className="text-sky-400">Pips</span>
               </span>
             </Link>
+
             <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
-              A beginner-friendly education platform for learning forex, market analysis, risk management, and trading fundamentals.
+              A beginner-friendly education platform for learning forex, market analysis, risk management, and trading
+              fundamentals.
             </p>
+
             <div className="flex items-center gap-3 mt-5">
               {["ph:twitter-logo", "ph:instagram-logo", "ph:youtube-logo"].map((icon, i) => (
                 <a
@@ -61,10 +69,7 @@ export default function Footer() {
               <ul className="space-y-2.5">
                 {links.map((link) => (
                   <li key={link.label}>
-                    <Link
-                      to={link.to}
-                      className="text-sm text-slate-400 hover:text-white transition-colors"
-                    >
+                    <Link to={link.to} className="text-sm text-slate-400 hover:text-white transition-colors">
                       {link.label}
                     </Link>
                   </li>
@@ -77,12 +82,26 @@ export default function Footer() {
         <div className="border-t border-white/10 pt-8">
           <div className="bg-white/5 rounded-xl px-5 py-4 mb-6">
             <p className="text-xs text-slate-400 leading-relaxed">
-              <span className="text-slate-300 font-medium">Educational Disclaimer:</span> All content on CorePips is for educational purposes only and does not constitute financial advice. Trading involves significant risk and may not be suitable for all individuals. Always conduct your own research and consult a qualified financial advisor before making any investment decisions.
+              <span className="text-slate-300 font-medium">Educational Disclaimer:</span> All content on CorePips is for
+              educational purposes only and does not constitute financial advice. Trading involves significant risk and
+              may not be suitable for all individuals. Always conduct your own research and consult a qualified
+              financial advisor before making any investment decisions.
             </p>
           </div>
+
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
             <p>© {new Date().getFullYear()} CorePips. All rights reserved.</p>
-            <p>For educational use only — not financial advice.</p>
+
+            <div className="flex items-center gap-3">
+              {legalLinks.map((link, index) => (
+                <div key={link.label} className="flex items-center gap-3">
+                  <Link to={link.to} className="hover:text-white transition-colors">
+                    {link.label}
+                  </Link>
+                  {index < legalLinks.length - 1 && <span className="text-white/20">/</span>}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
