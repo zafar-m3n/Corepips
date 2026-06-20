@@ -449,7 +449,7 @@ export default function Home() {
                   </div>
                   <div>
                     <p className="text-xs font-semibold text-core-muted">Email</p>
-                    <p className="text-sm font-medium text-core-ink">hello@corepips.com</p>
+                    <p className="text-sm font-medium text-core-ink">support@corepips.com</p>
                   </div>
                 </div>
 
