@@ -11,6 +11,7 @@ import DisclaimerBanner from "../components/common/DisclaimerBanner";
 import CTASection from "../components/common/CTASection";
 import SectionHeading from "../components/common/SectionHeading";
 import MockChart from "../components/common/MockChart";
+import ContactForm from "../components/common/ContactForm";
 import { learningPaths } from "../data/academy";
 import { marketNews } from "../data/markets";
 import { useHeroAnimation, useStaggerReveal } from "../hooks/useAnimation";
@@ -18,29 +19,102 @@ import { useHeroAnimation, useStaggerReveal } from "../hooks/useAnimation";
 gsap.registerPlugin(ScrollTrigger);
 
 const roadmapSteps = [
-  { step: "01", title: "Learn Forex Basics", desc: "Understand what forex is, how currency pairs work, and basic market mechanics.", icon: "ph:currency-circle-dollar" },
-  { step: "02", title: "Understand Risk", desc: "Learn why protecting capital is the foundation of every successful trading approach.", icon: "ph:shield-check" },
-  { step: "03", title: "Read Candlestick Charts", desc: "Discover how to interpret price action and spot patterns on any chart.", icon: "ph:chart-bar" },
-  { step: "04", title: "Follow Market News", desc: "Understand how economic events and central bank decisions move currency prices.", icon: "ph:newspaper" },
-  { step: "05", title: "Build a Trading Plan", desc: "Create structured rules for entries, exits, risk limits, and goals before trading.", icon: "ph:clipboard-text" },
+  {
+    step: "01",
+    title: "Learn Forex Basics",
+    desc: "Understand what forex is, how currency pairs work, and basic market mechanics.",
+    icon: "ph:currency-circle-dollar",
+  },
+  {
+    step: "02",
+    title: "Understand Risk",
+    desc: "Learn why protecting capital is the foundation of every successful trading approach.",
+    icon: "ph:shield-check",
+  },
+  {
+    step: "03",
+    title: "Read Candlestick Charts",
+    desc: "Discover how to interpret price action and spot patterns on any chart.",
+    icon: "ph:chart-bar",
+  },
+  {
+    step: "04",
+    title: "Follow Market News",
+    desc: "Understand how economic events and central bank decisions move currency prices.",
+    icon: "ph:newspaper",
+  },
+  {
+    step: "05",
+    title: "Build a Trading Plan",
+    desc: "Create structured rules for entries, exits, risk limits, and goals before trading.",
+    icon: "ph:clipboard-text",
+  },
 ];
 
 const benefits = [
-  { icon: "ph:graduation-cap", title: "Structured Lessons", desc: "Follow a logical learning path from complete beginner to confident analyst." },
-  { icon: "ph:chat-centered-text", title: "Simple Explanations", desc: "Complex market concepts broken down into plain, beginner-friendly language." },
-  { icon: "ph:calculator", title: "Practical Tools", desc: "Use pip calculators, position size tools, and a trading journal to learn by doing." },
-  { icon: "ph:shield-check", title: "Risk-First Education", desc: "We teach risk management early — because protecting capital matters more than profits." },
-  { icon: "ph:newspaper", title: "Market News Explained", desc: "Understand what economic events mean for currency markets without the jargon." },
-  { icon: "ph:book-open", title: "Beginner-Friendly Glossary", desc: "Every trading term explained simply with examples and real-world context." },
+  {
+    icon: "ph:graduation-cap",
+    title: "Structured Lessons",
+    desc: "Follow a logical learning path from complete beginner to confident analyst.",
+  },
+  {
+    icon: "ph:chat-centered-text",
+    title: "Simple Explanations",
+    desc: "Complex market concepts broken down into plain, beginner-friendly language.",
+  },
+  {
+    icon: "ph:calculator",
+    title: "Practical Tools",
+    desc: "Use pip calculators, position size tools, and a trading journal to learn by doing.",
+  },
+  {
+    icon: "ph:shield-check",
+    title: "Risk-First Education",
+    desc: "We teach risk management early — because protecting capital matters more than profits.",
+  },
+  {
+    icon: "ph:newspaper",
+    title: "Market News Explained",
+    desc: "Understand what economic events mean for currency markets without the jargon.",
+  },
+  {
+    icon: "ph:book-open",
+    title: "Beginner-Friendly Glossary",
+    desc: "Every trading term explained simply with examples and real-world context.",
+  },
 ];
 
 const glossaryChips = ["Pip", "Leverage", "Margin", "Spread", "Support", "Resistance", "CPI", "Interest Rate"];
 
 const tools = [
-  { icon: "ph:calculator", title: "Pip Calculator", description: "Calculate the pip value of any currency pair based on your lot size.", colorClass: "text-core-blue", bgClass: "bg-core-sky" },
-  { icon: "ph:scales", title: "Position Size Calculator", description: "Find the right trade size based on your account balance and risk tolerance.", colorClass: "text-core-teal", bgClass: "bg-teal-50" },
-  { icon: "ph:trend-up", title: "Risk/Reward Calculator", description: "Visualize your risk-to-reward ratio before entering any trade.", colorClass: "text-core-green", bgClass: "bg-core-mint" },
-  { icon: "ph:notebook", title: "Trading Journal", description: "Track your practice trades and review your decision-making over time.", colorClass: "text-core-gold", bgClass: "bg-core-amber" },
+  {
+    icon: "ph:calculator",
+    title: "Pip Calculator",
+    description: "Calculate the pip value of any currency pair based on your lot size.",
+    colorClass: "text-core-blue",
+    bgClass: "bg-core-sky",
+  },
+  {
+    icon: "ph:scales",
+    title: "Position Size Calculator",
+    description: "Find the right trade size based on your account balance and risk tolerance.",
+    colorClass: "text-core-teal",
+    bgClass: "bg-teal-50",
+  },
+  {
+    icon: "ph:trend-up",
+    title: "Risk/Reward Calculator",
+    description: "Visualize your risk-to-reward ratio before entering any trade.",
+    colorClass: "text-core-green",
+    bgClass: "bg-core-mint",
+  },
+  {
+    icon: "ph:notebook",
+    title: "Trading Journal",
+    description: "Track your practice trades and review your decision-making over time.",
+    colorClass: "text-core-gold",
+    bgClass: "bg-core-amber",
+  },
 ];
 
 export default function Home() {
@@ -57,16 +131,23 @@ export default function Home() {
       insightsRef.current.children,
       { opacity: 0, y: 30 },
       {
-        opacity: 1, y: 0, duration: 0.65, ease: "power3.out", stagger: 0.1,
+        opacity: 1,
+        y: 0,
+        duration: 0.65,
+        ease: "power3.out",
+        stagger: 0.1,
         scrollTrigger: { trigger: insightsRef.current, start: "top 85%", once: true },
-      }
+      },
     );
   }, []);
 
   return (
     <div>
       {/* Hero */}
-      <section ref={heroRef} className="relative pt-24 pb-16 md:pt-32 md:pb-24 overflow-hidden bg-gradient-to-br from-white via-core-bg to-core-sky/30">
+      <section
+        ref={heroRef}
+        className="relative pt-24 pb-16 md:pt-32 md:pb-24 overflow-hidden bg-gradient-to-br from-white via-core-bg to-core-sky/30"
+      >
         <BackgroundEffects variant="hero" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
@@ -77,13 +158,12 @@ export default function Home() {
                   Free Trading Education Platform
                 </div>
                 <h1 className="font-serif text-4xl md:text-5xl lg:text-[3.25rem] text-core-ink leading-[1.12] mb-5">
-                  Learn Forex, Trading &{" "}
-                  <span className="text-core-blue">Market Analysis</span>{" "}
-                  the Simple Way
+                  Learn Forex, Trading & <span className="text-core-blue">Market Analysis</span> the Simple Way
                 </h1>
               </div>
               <p data-hero-sub className="text-lg text-core-muted leading-relaxed mb-8 max-w-lg">
-                CorePips helps beginners understand forex, chart reading, market news, and risk management through structured lessons, simple explanations, and practical tools.
+                CorePips helps beginners understand forex, chart reading, market news, and risk management through
+                structured lessons, simple explanations, and practical tools.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link
@@ -104,7 +184,11 @@ export default function Home() {
                 </Link>
               </div>
               <div className="flex items-center gap-6 mt-8">
-                {[["6+", "Learning Paths"], ["50+", "Lessons"], ["4", "Free Tools"]].map(([val, label]) => (
+                {[
+                  ["6+", "Learning Paths"],
+                  ["50+", "Lessons"],
+                  ["4", "Free Tools"],
+                ].map(([val, label]) => (
                   <div key={label}>
                     <p className="text-xl font-bold text-core-ink">{val}</p>
                     <p className="text-xs text-core-muted">{label}</p>
@@ -124,7 +208,10 @@ export default function Home() {
                   </div>
                   <div className="flex items-center gap-2">
                     {["1H", "4H", "1D"].map((tf) => (
-                      <button key={tf} className={`text-xs px-2 py-1 rounded-md ${tf === "4H" ? "bg-core-blue text-white" : "bg-core-soft text-core-muted"}`}>
+                      <button
+                        key={tf}
+                        className={`text-xs px-2 py-1 rounded-md ${tf === "4H" ? "bg-core-blue text-white" : "bg-core-soft text-core-muted"}`}
+                      >
                         {tf}
                       </button>
                     ))}
@@ -200,7 +287,10 @@ export default function Home() {
           />
           <div ref={roadmapRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mt-10">
             {roadmapSteps.map((s, i) => (
-              <div key={s.step} className="relative bg-white rounded-2xl border border-core-line p-5 shadow-sm hover:shadow-md hover:border-blue-200 transition-all">
+              <div
+                key={s.step}
+                className="relative bg-white rounded-2xl border border-core-line p-5 shadow-sm hover:shadow-md hover:border-blue-200 transition-all"
+              >
                 {i < roadmapSteps.length - 1 && (
                   <div className="hidden lg:block absolute -right-2 top-1/2 -translate-y-1/2 w-4 h-0.5 bg-core-line z-10" />
                 )}
@@ -226,7 +316,10 @@ export default function Home() {
           />
           <div ref={benefitsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {benefits.map((b) => (
-              <div key={b.title} className="flex gap-4 p-5 bg-core-soft rounded-2xl border border-core-line hover:border-blue-200 hover:bg-white transition-all">
+              <div
+                key={b.title}
+                className="flex gap-4 p-5 bg-core-soft rounded-2xl border border-core-line hover:border-blue-200 hover:bg-white transition-all"
+              >
                 <div className="w-10 h-10 rounded-xl bg-core-sky flex items-center justify-center shrink-0">
                   <Icon icon={b.icon} className="text-core-blue text-xl" />
                 </div>
@@ -250,7 +343,10 @@ export default function Home() {
               title="Latest Market Insights"
               subtitle="Understand what's moving the markets — explained for beginners."
             />
-            <Link to="/markets" className="inline-flex items-center gap-1.5 text-sm font-semibold text-core-blue hover:text-blue-700 transition-colors shrink-0 mb-12">
+            <Link
+              to="/markets"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-core-blue hover:text-blue-700 transition-colors shrink-0 mb-12"
+            >
               View All <Icon icon="ph:arrow-right" className="text-sm" />
             </Link>
           </div>
@@ -316,16 +412,60 @@ export default function Home() {
               <div className="bg-white rounded-2xl border border-core-line p-5 shadow-sm">
                 <div className="flex items-start justify-between mb-2">
                   <p className="text-sm font-bold text-core-ink">Pip</p>
-                  <span className="text-xs px-2 py-0.5 rounded-full bg-core-sky text-core-blue font-semibold">Forex Basics</span>
+                  <span className="text-xs px-2 py-0.5 rounded-full bg-core-sky text-core-blue font-semibold">
+                    Forex Basics
+                  </span>
                 </div>
                 <p className="text-xs text-core-muted leading-relaxed mb-2">
                   The smallest standard price movement in a currency pair, typically 0.0001.
                 </p>
                 <div className="bg-core-soft rounded-lg px-3 py-2">
-                  <p className="text-xs text-core-ink"><span className="font-semibold">Example:</span> If EUR/USD moves from 1.1000 to 1.1001, that's a 1-pip move.</p>
+                  <p className="text-xs text-core-ink">
+                    <span className="font-semibold">Example:</span> If EUR/USD moves from 1.1000 to 1.1001, that's a
+                    1-pip move.
+                  </p>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact */}
+      <section className="py-16 md:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div>
+              <SectionHeading
+                eyebrow="Contact"
+                title="Have a Question?"
+                subtitle="Get in touch with CorePips if you have a question about the platform, learning paths, or trading education."
+              />
+
+              <div className="space-y-4">
+                <div className="flex items-center gap-3 p-4 bg-core-soft rounded-xl border border-core-line">
+                  <div className="w-9 h-9 rounded-lg bg-core-sky flex items-center justify-center">
+                    <Icon icon="ph:envelope" className="text-core-blue text-base" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-core-muted">Email</p>
+                    <p className="text-sm font-medium text-core-ink">hello@corepips.com</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3 p-4 bg-core-soft rounded-xl border border-core-line">
+                  <div className="w-9 h-9 rounded-lg bg-core-sky flex items-center justify-center">
+                    <Icon icon="ph:chat-circle-dots" className="text-core-blue text-base" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-core-muted">Response Time</p>
+                    <p className="text-sm font-medium text-core-ink">Within 48 hours</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <ContactForm />
           </div>
         </div>
       </section>

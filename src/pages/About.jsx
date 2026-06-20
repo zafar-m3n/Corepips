@@ -185,7 +185,7 @@ export default function About() {
                   </div>
                   <div>
                     <p className="text-xs font-semibold text-core-muted">Email</p>
-                    <p className="text-sm font-medium text-core-ink">hello@corepips.com</p>
+                    <p className="text-sm font-medium text-core-ink">support@corepips.com</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 p-4 bg-core-soft rounded-xl border border-core-line">
