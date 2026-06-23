@@ -4,12 +4,12 @@ import { trackLeadFormConversion } from "@/lib/googleAds";
 
 const WEB3FORMS_ACCESS_KEY = "417feb7c-1792-445b-a650-48289a7d2a3c";
 
-function ContactForm() {
+function ContactForm({ icon, title, subheading, buttonText }) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     tradingExperience: "",
-    message: "",
+    phone: "",
     botcheck: "",
   });
 
@@ -37,7 +37,12 @@ function ContactForm() {
       message: "",
     });
 
-    if (!formData.name || !formData.email || !formData.tradingExperience || !formData.message) {
+    if (
+      !formData.name.trim() ||
+      !formData.email.trim() ||
+      !formData.tradingExperience.trim() ||
+      !formData.phone.trim()
+    ) {
       setStatus({
         type: "error",
         message: "Please fill in all required fields before submitting.",
@@ -55,7 +60,7 @@ function ContactForm() {
       name: formData.name,
       email: formData.email,
       trading_experience: formData.tradingExperience,
-      message: formData.message,
+      phone: formData.phone,
       botcheck: formData.botcheck,
     };
 
@@ -83,7 +88,7 @@ function ContactForm() {
           name: "",
           email: "",
           tradingExperience: "",
-          message: "",
+          phone: "",
           botcheck: "",
         });
 
@@ -106,16 +111,16 @@ function ContactForm() {
 
   return (
     <div className="bg-core-soft rounded-3xl border border-core-line p-6 sm:p-8 shadow-sm">
-      <div className="mb-6">
-        <div className="w-12 h-12 rounded-2xl bg-core-sky flex items-center justify-center mb-4">
-          <Icon icon="ph:paper-plane-tilt" className="text-core-blue text-2xl" />
-        </div>
+      <div className={`flex items-center ${icon ? "mb-4" : ""}`}>
+        {icon && (
+          <div className="w-12 h-12 rounded-2xl bg-core-sky flex items-center justify-center mb-4">
+            <Icon icon={icon} className="text-core-blue text-2xl" />
+          </div>
+        )}
 
-        <h3 className="font-serif text-2xl md:text-3xl text-core-ink mb-2">Send us a message</h3>
+        <h3 className="font-serif text-2xl md:text-3xl text-core-ink mb-2">{title}</h3>
 
-        <p className="text-sm text-core-muted leading-relaxed">
-          Fill out the form below and we’ll get back to you within 48 hours.
-        </p>
+        <p className="text-sm text-core-muted leading-relaxed">{subheading}</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-5">
@@ -190,18 +195,19 @@ function ContactForm() {
         </div>
 
         <div>
-          <label htmlFor="message" className="block text-sm font-semibold text-core-ink mb-2">
-            Message
+          <label htmlFor="phone" className="block text-sm font-semibold text-core-ink mb-2">
+            Phone Number
           </label>
 
-          <textarea
-            id="message"
-            name="message"
-            value={formData.message}
+          <input
+            id="phone"
+            type="tel"
+            name="phone"
+            value={formData.phone}
             onChange={handleChange}
-            placeholder="Tell us how we can help"
-            rows="5"
-            className="w-full resize-none rounded-xl border border-core-line bg-white px-4 py-3 text-sm text-core-ink placeholder:text-core-muted outline-none transition-all focus:border-core-blue focus:ring-4 focus:ring-blue-100"
+            placeholder="Enter your phone number"
+            autoComplete="tel"
+            className="w-full h-12 rounded-xl border border-core-line bg-white px-4 text-sm text-core-ink placeholder:text-core-muted outline-none transition-all focus:border-core-blue focus:ring-4 focus:ring-blue-100"
           />
         </div>
 
@@ -229,7 +235,7 @@ function ContactForm() {
             </>
           ) : (
             <>
-              Submit Message
+              {buttonText || "Send Message"}
               <Icon icon="ph:arrow-right" className="text-lg" />
             </>
           )}

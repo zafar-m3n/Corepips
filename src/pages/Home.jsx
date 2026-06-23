@@ -10,7 +10,6 @@ import MarketNewsCard from "../components/cards/MarketNewsCard";
 import DisclaimerBanner from "../components/common/DisclaimerBanner";
 import CTASection from "../components/common/CTASection";
 import SectionHeading from "../components/common/SectionHeading";
-import MockChart from "../components/common/MockChart";
 import ContactForm from "../components/common/ContactForm";
 import { learningPaths } from "../data/academy";
 import { marketNews } from "../data/markets";
@@ -146,7 +145,7 @@ export default function Home() {
       {/* Hero */}
       <section
         ref={heroRef}
-        className="relative pt-24 pb-16 md:pt-32 md:pb-24 overflow-hidden bg-gradient-to-br from-white via-core-bg to-core-sky/30"
+        className="relative pt-24 pb-16 md:pt-32 md:pb-24 overflow-hidden bg-linear-to-br from-white via-core-bg to-core-sky/30"
       >
         <BackgroundEffects variant="hero" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -165,24 +164,6 @@ export default function Home() {
                 CorePips helps beginners understand forex, chart reading, market news, and risk management through
                 structured lessons, simple explanations, and practical tools.
               </p>
-              <div className="flex flex-wrap gap-3">
-                <Link
-                  data-hero-cta
-                  to="/academy"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-core-blue text-white text-sm font-semibold hover:bg-blue-700 transition-colors shadow-sm"
-                >
-                  Start Learning
-                  <Icon icon="ph:arrow-right" />
-                </Link>
-                <Link
-                  data-hero-cta
-                  to="/tools"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-core-line bg-white text-core-ink text-sm font-semibold hover:bg-core-soft hover:border-blue-200 transition-colors"
-                >
-                  <Icon icon="ph:calculator" />
-                  Explore Tools
-                </Link>
-              </div>
               <div className="flex items-center gap-6 mt-8">
                 {[
                   ["6+", "Learning Paths"],
@@ -197,63 +178,8 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Hero dashboard card */}
             <div data-hero-visual className="relative">
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-core-line shadow-xl p-5 relative">
-                <div className="flex items-center justify-between mb-4">
-                  <div>
-                    <p className="text-xs text-core-subtle">EUR / USD</p>
-                    <p className="text-2xl font-bold text-core-ink">1.0847</p>
-                    <span className="text-xs font-semibold text-core-green">+0.35%</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    {["1H", "4H", "1D"].map((tf) => (
-                      <button
-                        key={tf}
-                        className={`text-xs px-2 py-1 rounded-md ${tf === "4H" ? "bg-core-blue text-white" : "bg-core-soft text-core-muted"}`}
-                      >
-                        {tf}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-                <MockChart />
-                <div className="grid grid-cols-3 gap-2 mt-4">
-                  {[
-                    { label: "Spread", val: "0.2 pips", color: "text-core-ink" },
-                    { label: "Daily High", val: "1.0893", color: "text-core-green" },
-                    { label: "Daily Low", val: "1.0801", color: "text-core-red" },
-                  ].map(({ label, val, color }) => (
-                    <div key={label} className="bg-core-soft rounded-lg p-2.5">
-                      <p className="text-xs text-core-subtle mb-0.5">{label}</p>
-                      <p className={`text-xs font-bold ${color}`}>{val}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              {/* Floating cards */}
-              <div className="absolute -top-4 -right-4 bg-white rounded-xl border border-core-line shadow-md px-3 py-2.5 hidden sm:block">
-                <div className="flex items-center gap-2">
-                  <div className="w-7 h-7 rounded-lg bg-core-mint flex items-center justify-center">
-                    <Icon icon="ph:shield-check" className="text-core-green text-sm" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-core-ink">Risk: 1%</p>
-                    <p className="text-xs text-core-subtle">Per trade</p>
-                  </div>
-                </div>
-              </div>
-              <div className="absolute -bottom-4 -left-4 bg-white rounded-xl border border-core-line shadow-md px-3 py-2.5 hidden sm:block">
-                <div className="flex items-center gap-2">
-                  <div className="w-7 h-7 rounded-lg bg-core-sky flex items-center justify-center">
-                    <Icon icon="ph:graduation-cap" className="text-core-blue text-sm" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-core-ink">Lesson 3/8</p>
-                    <p className="text-xs text-core-subtle">Forex Basics</p>
-                  </div>
-                </div>
-              </div>
+              <ContactForm buttonText="Start Learning For Free" />
             </div>
           </div>
         </div>
@@ -427,45 +353,6 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div>
-              <SectionHeading
-                eyebrow="Contact"
-                title="Have a Question?"
-                subtitle="Get in touch with CorePips if you have a question about the platform, learning paths, or trading education."
-              />
-
-              <div className="space-y-4">
-                <div className="flex items-center gap-3 p-4 bg-core-soft rounded-xl border border-core-line">
-                  <div className="w-9 h-9 rounded-lg bg-core-sky flex items-center justify-center">
-                    <Icon icon="ph:envelope" className="text-core-blue text-base" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-core-muted">Email</p>
-                    <p className="text-sm font-medium text-core-ink">support@corepips.com</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-3 p-4 bg-core-soft rounded-xl border border-core-line">
-                  <div className="w-9 h-9 rounded-lg bg-core-sky flex items-center justify-center">
-                    <Icon icon="ph:chat-circle-dots" className="text-core-blue text-base" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-core-muted">Response Time</p>
-                    <p className="text-sm font-medium text-core-ink">Within 48 hours</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <ContactForm />
           </div>
         </div>
       </section>
