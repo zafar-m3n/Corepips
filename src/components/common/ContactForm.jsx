@@ -169,6 +169,23 @@ function ContactForm({ icon, title, subheading, buttonText }) {
         </div>
 
         <div>
+          <label htmlFor="phone" className="block text-sm font-semibold text-core-ink mb-2">
+            Phone Number
+          </label>
+
+          <input
+            id="phone"
+            type="tel"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            placeholder="Enter your phone number"
+            autoComplete="tel"
+            className="w-full h-12 rounded-xl border border-core-line bg-white px-4 text-sm text-core-ink placeholder:text-core-muted outline-none transition-all focus:border-core-blue focus:ring-4 focus:ring-blue-100"
+          />
+        </div>
+
+        <div>
           <label htmlFor="tradingExperience" className="block text-sm font-semibold text-core-ink mb-2">
             What is your trading experience?
           </label>
@@ -192,23 +209,6 @@ function ContactForm({ icon, title, subheading, buttonText }) {
               className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-core-muted text-base"
             />
           </div>
-        </div>
-
-        <div>
-          <label htmlFor="phone" className="block text-sm font-semibold text-core-ink mb-2">
-            Phone Number
-          </label>
-
-          <input
-            id="phone"
-            type="tel"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            placeholder="Enter your phone number"
-            autoComplete="tel"
-            className="w-full h-12 rounded-xl border border-core-line bg-white px-4 text-sm text-core-ink placeholder:text-core-muted outline-none transition-all focus:border-core-blue focus:ring-4 focus:ring-blue-100"
-          />
         </div>
 
         {status.message && (

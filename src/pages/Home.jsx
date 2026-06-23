@@ -156,13 +156,14 @@ export default function Home() {
                   <Icon icon="ph:graduation-cap" className="text-sm" />
                   Free Trading Education Platform
                 </div>
+
                 <h1 className="font-serif text-4xl md:text-5xl lg:text-[3.25rem] text-core-ink leading-[1.12] mb-5">
-                  Learn Forex, Trading & <span className="text-core-blue">Market Analysis</span> the Simple Way
+                  Learn Free Online <span className="text-core-blue">Forex Trading Courses</span>
                 </h1>
               </div>
               <p data-hero-sub className="text-lg text-core-muted leading-relaxed mb-8 max-w-lg">
-                CorePips helps beginners understand forex, chart reading, market news, and risk management through
-                structured lessons, simple explanations, and practical tools.
+                Find Courses Suited to Traders at All Levels and build your foundation with simple forex lessons, market
+                analysis, risk management guidance, and practical trading tools.
               </p>
               <div className="flex items-center gap-6 mt-8">
                 {[
