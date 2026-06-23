@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Icon } from "@iconify/react";
+import { trackLeadFormConversion } from "@/lib/googleAds";
 
 const WEB3FORMS_ACCESS_KEY = "417feb7c-1792-445b-a650-48289a7d2a3c";
 
@@ -71,6 +72,8 @@ function ContactForm() {
       const result = await response.json();
 
       if (result.success) {
+        trackLeadFormConversion();
+
         setStatus({
           type: "success",
           message: "Your message has been sent successfully. We'll get back to you soon.",
