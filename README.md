@@ -1,16 +1,58 @@
-# React + Vite
+# CorePips
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Learn Forex, Trading & Market Analysis — the Right Way**
 
-Currently, two official plugins are available:
+CorePips is a free, beginner-friendly trading education platform. It exists to help people build a solid understanding of forex and financial markets before they ever risk real money — through structured lessons, plain-language explanations, and practical tools.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+🔗 [corepips.com](https://corepips.com/)
 
-## React Compiler
+## Mission
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Education first. Always.
 
-## Expanding the ESLint configuration
+CorePips believes that anyone who wants to learn about financial markets deserves access to clear, honest, structured content — without hype, without profit promises, and without trading signals. The platform's core belief:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+> Learn the basics, understand the markets, manage your risk.
+
+CorePips is explicitly **not** a signals service, a broker, or a source of financial advice. It doesn't sell trade calls or claim anyone will make money. It teaches, and lets learners make their own informed decisions.
+
+## Who It's For
+
+- Complete beginners learning forex for the first time
+- Students interested in how financial markets work
+- New traders who want to learn risk management before strategy
+- Anyone who wants to understand financial news and market-moving events
+
+No prior trading experience is required, and the platform is 100% free to access — no subscriptions, no paywalls.
+
+## What's on the Platform
+
+**Academy** — Structured learning paths and courses that build from complete-beginner concepts (what forex is, currency pairs, pips, lots, spreads) up through chart reading, risk management, and trading psychology. Includes a plain-English glossary of trading terms.
+
+**Markets** — Ongoing market education content: a weekly market outlook, currency watchlist, economic event calendar, and news explained in beginner-friendly terms — focused on understanding *why* markets move, not on giving trade tips.
+
+**Analysis** — Lessons on reading price charts: candlestick patterns, trends, support and resistance, timeframes, technical indicators, and chart patterns, illustrated with example charts.
+
+**Tools** — Free, practical calculators to learn by doing:
+- Pip Calculator
+- Position Size Calculator
+- Risk/Reward Calculator
+- Trading Journal (for tracking and reviewing practice trades)
+
+**About / FAQ** — Background on the mission, curriculum, and answers to common questions (e.g., "Is CorePips financial advice?" — No. "Does CorePips provide trading signals?" — No.)
+
+## Approach
+
+- Structured learning paths, organized from beginner to advanced
+- Risk awareness taught from day one, before strategies or indicators
+- No signal selling, no profit promises
+- Plain language throughout — no unnecessary jargon
+
+## Disclaimer
+
+All content on CorePips is for educational purposes only and does not constitute financial advice. Trading involves significant risk and may not be suitable for all individuals. Always conduct independent research and consult a qualified financial advisor before making investment decisions.
+
+## Contact
+
+- **Email:** support@corepips.com
+- **Response time:** within 48 hours
