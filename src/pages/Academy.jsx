@@ -15,7 +15,14 @@ import { useStaggerReveal } from "../hooks/useAnimation";
 gsap.registerPlugin(ScrollTrigger);
 
 const levels = ["Beginner", "Intermediate", "Advanced"];
-const glossaryCategories = ["All", "Forex Basics", "Technical Analysis", "Fundamental Analysis", "Risk Management", "Market Terms"];
+const glossaryCategories = [
+  "All",
+  "Forex Basics",
+  "Technical Analysis",
+  "Fundamental Analysis",
+  "Risk Management",
+  "Market Terms",
+];
 
 export default function Academy() {
   const [activeLevel, setActiveLevel] = useState("Beginner");
@@ -25,7 +32,8 @@ export default function Academy() {
   const coursesRef = useStaggerReveal(0.08);
 
   const filteredGlossary = glossaryTerms.filter((t) => {
-    const matchSearch = t.term.toLowerCase().includes(glossarySearch.toLowerCase()) ||
+    const matchSearch =
+      t.term.toLowerCase().includes(glossarySearch.toLowerCase()) ||
       t.definition.toLowerCase().includes(glossarySearch.toLowerCase());
     const matchCat = glossaryCategory === "All" || t.category === glossaryCategory;
     return matchSearch && matchCat;
@@ -43,10 +51,16 @@ export default function Academy() {
         subtext="Follow beginner-friendly learning paths that explain forex, market analysis, risk management, and trading psychology in simple language."
       >
         <div className="flex flex-wrap gap-3">
-          <a href="#courses" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-core-blue text-white text-sm font-semibold hover:bg-blue-700 transition-colors shadow-sm">
+          <a
+            href="#courses"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-core-blue text-white text-sm font-semibold hover:bg-blue-700 transition-colors shadow-sm"
+          >
             Browse Courses <Icon icon="ph:arrow-right" />
           </a>
-          <a href="#glossary" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-core-line bg-white text-core-ink text-sm font-semibold hover:bg-core-soft transition-colors">
+          <a
+            href="#glossary"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-core-line bg-white text-core-ink text-sm font-semibold hover:bg-core-soft transition-colors"
+          >
             <Icon icon="ph:book-open" /> View Glossary
           </a>
         </div>
@@ -92,7 +106,9 @@ export default function Academy() {
             </div>
             <div className="flex-1 text-center md:text-left">
               <p className="text-base font-bold text-core-ink mb-1">Test your knowledge after each learning path.</p>
-              <p className="text-sm text-core-muted">Short quizzes help reinforce what you've learned and highlight areas to revisit.</p>
+              <p className="text-sm text-core-muted">
+                Short quizzes help reinforce what you've learned and highlight areas to revisit.
+              </p>
             </div>
             <button className="shrink-0 px-5 py-2.5 rounded-xl bg-core-blue text-white text-sm font-semibold hover:bg-blue-700 transition-colors">
               Coming Soon

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
-import { trackLeadFormConversion } from "@/lib/googleAds";
 
 const WEB3FORMS_ACCESS_KEY = "417feb7c-1792-445b-a650-48289a7d2a3c";
 
@@ -50,8 +50,11 @@ function Toast({ toast, onClose }) {
 }
 
 function ContactForm({ icon, title, subheading, buttonText }) {
+  const navigate = useNavigate();
+
   const toastTimerRef = useRef(null);
   const toastAnimationRef = useRef(null);
+  const isSubmittingRef = useRef(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -140,6 +143,10 @@ function ContactForm({ icon, title, subheading, buttonText }) {
   async function handleSubmit(event) {
     event.preventDefault();
 
+    if (isSubmittingRef.current) {
+      return;
+    }
+
     if (
       !formData.name.trim() ||
       !formData.email.trim() ||
@@ -150,6 +157,7 @@ function ContactForm({ icon, title, subheading, buttonText }) {
       return;
     }
 
+    isSubmittingRef.current = true;
     setIsSubmitting(true);
 
     const payload = {
@@ -176,10 +184,6 @@ function ContactForm({ icon, title, subheading, buttonText }) {
       const result = await response.json();
 
       if (result.success) {
-        trackLeadFormConversion();
-
-        showToast("success", "Your message has been sent successfully. We'll get back to you soon.");
-
         setFormData({
           name: "",
           email: "",
@@ -188,6 +192,7 @@ function ContactForm({ icon, title, subheading, buttonText }) {
           botcheck: "",
         });
 
+        navigate("/thank-you", { state: { fromContactForm: true } });
         return;
       }
 
@@ -195,6 +200,7 @@ function ContactForm({ icon, title, subheading, buttonText }) {
     } catch (error) {
       showToast("error", "Unable to send your message right now. Please try again later.");
     } finally {
+      isSubmittingRef.current = false;
       setIsSubmitting(false);
     }
   }

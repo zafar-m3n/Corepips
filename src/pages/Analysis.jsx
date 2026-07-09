@@ -19,10 +19,26 @@ const signalColors = {
 };
 
 const readingTopics = [
-  { icon: "ph:chart-bar", title: "Candlesticks", desc: "Learn the open, high, low, and close of every candle and what they mean." },
-  { icon: "ph:trend-up", title: "Trends", desc: "Identify uptrends, downtrends, and sideways markets with confidence." },
-  { icon: "ph:arrows-vertical", title: "Support & Resistance", desc: "Spot key price levels where buying and selling pressure tends to cluster." },
-  { icon: "ph:clock", title: "Timeframes", desc: "Understand the difference between short-term and long-term chart views." },
+  {
+    icon: "ph:chart-bar",
+    title: "Candlesticks",
+    desc: "Learn the open, high, low, and close of every candle and what they mean.",
+  },
+  {
+    icon: "ph:trend-up",
+    title: "Trends",
+    desc: "Identify uptrends, downtrends, and sideways markets with confidence.",
+  },
+  {
+    icon: "ph:arrows-vertical",
+    title: "Support & Resistance",
+    desc: "Spot key price levels where buying and selling pressure tends to cluster.",
+  },
+  {
+    icon: "ph:clock",
+    title: "Timeframes",
+    desc: "Understand the difference between short-term and long-term chart views.",
+  },
 ];
 
 export default function Analysis() {
@@ -50,11 +66,16 @@ export default function Analysis() {
                 <div className="flex items-center justify-between mb-4">
                   <div>
                     <p className="text-xs text-core-subtle mb-0.5">GBP / USD</p>
-                    <p className="text-xl font-bold text-core-ink">1.2685 <span className="text-sm font-normal text-core-red">-0.18%</span></p>
+                    <p className="text-xl font-bold text-core-ink">
+                      1.2685 <span className="text-sm font-normal text-core-red">-0.18%</span>
+                    </p>
                   </div>
                   <div className="flex items-center gap-2">
                     {["1H", "4H", "1D", "1W"].map((tf) => (
-                      <button key={tf} className={`text-xs px-2.5 py-1.5 rounded-lg ${tf === "4H" ? "bg-core-blue text-white" : "bg-core-soft text-core-muted hover:text-core-ink"}`}>
+                      <button
+                        key={tf}
+                        className={`text-xs px-2.5 py-1.5 rounded-lg ${tf === "4H" ? "bg-core-blue text-white" : "bg-core-soft text-core-muted hover:text-core-ink"}`}
+                      >
                         {tf}
                       </button>
                     ))}
@@ -63,12 +84,20 @@ export default function Analysis() {
                 <MockChart />
                 <div className="flex items-center justify-between mt-3 pt-3 border-t border-core-line">
                   <div className="flex items-center gap-4 text-xs">
-                    <span className="flex items-center gap-1.5"><span className="w-3 h-0.5 bg-core-blue rounded block" /> MA(20)</span>
-                    <span className="flex items-center gap-1.5"><span className="w-3 h-0.5 bg-core-teal rounded block" style={{ borderStyle: "dashed" }} /> MA(50)</span>
+                    <span className="flex items-center gap-1.5">
+                      <span className="w-3 h-0.5 bg-core-blue rounded block" /> MA(20)
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                      <span className="w-3 h-0.5 bg-core-teal rounded block" style={{ borderStyle: "dashed" }} /> MA(50)
+                    </span>
                   </div>
                   <div className="flex items-center gap-2 text-xs text-core-muted">
-                    <span className="px-2 py-0.5 rounded bg-red-50 border border-red-100 text-core-red font-semibold text-xs">R: 1.2720</span>
-                    <span className="px-2 py-0.5 rounded bg-core-mint border border-green-100 text-core-green font-semibold text-xs">S: 1.2640</span>
+                    <span className="px-2 py-0.5 rounded bg-red-50 border border-red-100 text-core-red font-semibold text-xs">
+                      R: 1.2720
+                    </span>
+                    <span className="px-2 py-0.5 rounded bg-core-mint border border-green-100 text-core-green font-semibold text-xs">
+                      S: 1.2640
+                    </span>
                   </div>
                 </div>
               </div>
@@ -80,7 +109,9 @@ export default function Analysis() {
                     <div className="bg-core-blue h-1.5 rounded-full" style={{ width: "43%" }} />
                   </div>
                   <div className="flex justify-between text-xs text-core-subtle mt-1">
-                    <span>0</span><span>70</span><span>100</span>
+                    <span>0</span>
+                    <span>70</span>
+                    <span>100</span>
                   </div>
                 </div>
                 <div className="bg-white rounded-xl border border-core-line p-3">
@@ -102,7 +133,9 @@ export default function Analysis() {
                 </div>
                 <div className="bg-core-sky/50 rounded-xl border border-blue-100 p-3">
                   <p className="text-xs font-semibold text-core-blue mb-1.5">Reading this chart</p>
-                  <p className="text-xs text-core-muted leading-relaxed">Price is between S/R levels. RSI near 43 suggests neutral momentum — not overbought or oversold.</p>
+                  <p className="text-xs text-core-muted leading-relaxed">
+                    Price is between S/R levels. RSI near 43 suggests neutral momentum — not overbought or oversold.
+                  </p>
                 </div>
               </div>
             </div>
@@ -120,7 +153,10 @@ export default function Analysis() {
           />
           <div ref={topicsRef} className="grid grid-cols-2 md:grid-cols-4 gap-5">
             {readingTopics.map((t) => (
-              <div key={t.title} className="bg-core-soft rounded-2xl border border-core-line p-5 hover:bg-white hover:border-blue-200 hover:shadow-md transition-all">
+              <div
+                key={t.title}
+                className="bg-core-soft rounded-2xl border border-core-line p-5 hover:bg-white hover:border-blue-200 hover:shadow-md transition-all"
+              >
                 <div className="w-10 h-10 rounded-xl bg-core-sky flex items-center justify-center mb-3">
                   <Icon icon={t.icon} className="text-core-blue text-xl" />
                 </div>
@@ -143,13 +179,18 @@ export default function Analysis() {
           />
           <div ref={candlesRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {candlestickPatterns.map((p) => (
-              <div key={p.name} className="bg-white rounded-2xl border border-core-line p-5 shadow-sm hover:shadow-md hover:border-blue-200 transition-all">
+              <div
+                key={p.name}
+                className="bg-white rounded-2xl border border-core-line p-5 shadow-sm hover:shadow-md hover:border-blue-200 transition-all"
+              >
                 <div className="w-10 h-10 rounded-xl bg-core-soft flex items-center justify-center mb-3">
                   <Icon icon={p.icon} className="text-core-ink text-xl" />
                 </div>
                 <h3 className="text-sm font-bold text-core-ink mb-1.5">{p.name}</h3>
                 <p className="text-xs text-core-muted leading-relaxed mb-3">{p.description}</p>
-                <span className={`text-xs font-semibold px-2.5 py-1 rounded-full border ${signalColors[p.signal] || "bg-core-soft text-core-muted border-core-line"}`}>
+                <span
+                  className={`text-xs font-semibold px-2.5 py-1 rounded-full border ${signalColors[p.signal] || "bg-core-soft text-core-muted border-core-line"}`}
+                >
                   {p.signal}
                 </span>
               </div>
@@ -168,7 +209,10 @@ export default function Analysis() {
           />
           <div ref={indicatorsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {technicalIndicators.map((ind) => (
-              <div key={ind.name} className="bg-core-soft rounded-2xl border border-core-line p-5 hover:bg-white hover:border-blue-200 hover:shadow-md transition-all">
+              <div
+                key={ind.name}
+                className="bg-core-soft rounded-2xl border border-core-line p-5 hover:bg-white hover:border-blue-200 hover:shadow-md transition-all"
+              >
                 <div className="w-10 h-10 rounded-xl bg-core-sky flex items-center justify-center mb-3">
                   <Icon icon={ind.icon} className="text-core-blue text-xl" />
                 </div>
@@ -195,10 +239,15 @@ export default function Analysis() {
           />
           <div ref={patternsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {chartPatterns.map((p) => (
-              <div key={p.name} className="bg-white rounded-2xl border border-core-line p-5 shadow-sm hover:shadow-md hover:border-blue-200 transition-all">
+              <div
+                key={p.name}
+                className="bg-white rounded-2xl border border-core-line p-5 shadow-sm hover:shadow-md hover:border-blue-200 transition-all"
+              >
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="text-sm font-bold text-core-ink">{p.name}</h3>
-                  <span className={`text-xs font-semibold px-2 py-0.5 rounded-full border ${signalColors[p.signal] || "bg-core-soft text-core-muted border-core-line"}`}>
+                  <span
+                    className={`text-xs font-semibold px-2 py-0.5 rounded-full border ${signalColors[p.signal] || "bg-core-soft text-core-muted border-core-line"}`}
+                  >
                     {p.signal}
                   </span>
                 </div>
@@ -219,7 +268,10 @@ export default function Analysis() {
           />
           <div ref={examplesRef} className="grid grid-cols-1 lg:grid-cols-3 gap-5">
             {chartExamples.map((ex) => (
-              <div key={ex.title} className="bg-core-soft rounded-2xl border border-core-line p-5 hover:bg-white hover:shadow-md hover:border-blue-200 transition-all">
+              <div
+                key={ex.title}
+                className="bg-core-soft rounded-2xl border border-core-line p-5 hover:bg-white hover:shadow-md hover:border-blue-200 transition-all"
+              >
                 <h3 className="text-sm font-bold text-core-ink mb-3 flex items-center gap-2">
                   <Icon icon="ph:chart-line-up" className="text-core-blue text-base shrink-0" />
                   {ex.title}

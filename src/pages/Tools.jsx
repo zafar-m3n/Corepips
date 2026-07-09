@@ -45,16 +45,29 @@ function PipCalculator() {
         </div>
         <div>
           <label className="block text-xs font-semibold text-core-muted mb-1.5">Lot Size</label>
-          <input type="number" value={lot} onChange={(e) => setLot(e.target.value)} placeholder="0.1"
-            className="w-full px-3 py-2.5 rounded-xl border border-core-line bg-core-soft text-sm text-core-ink focus:outline-none focus:border-core-blue focus:ring-2 focus:ring-core-blue/15 transition" />
+          <input
+            type="number"
+            value={lot}
+            onChange={(e) => setLot(e.target.value)}
+            placeholder="0.1"
+            className="w-full px-3 py-2.5 rounded-xl border border-core-line bg-core-soft text-sm text-core-ink focus:outline-none focus:border-core-blue focus:ring-2 focus:ring-core-blue/15 transition"
+          />
         </div>
         <div>
           <label className="block text-xs font-semibold text-core-muted mb-1.5">Pip Movement</label>
-          <input type="number" value={movement} onChange={(e) => setMovement(e.target.value)} placeholder="10"
-            className="w-full px-3 py-2.5 rounded-xl border border-core-line bg-core-soft text-sm text-core-ink focus:outline-none focus:border-core-blue focus:ring-2 focus:ring-core-blue/15 transition" />
+          <input
+            type="number"
+            value={movement}
+            onChange={(e) => setMovement(e.target.value)}
+            placeholder="10"
+            className="w-full px-3 py-2.5 rounded-xl border border-core-line bg-core-soft text-sm text-core-ink focus:outline-none focus:border-core-blue focus:ring-2 focus:ring-core-blue/15 transition"
+          />
         </div>
       </div>
-      <button onClick={calculate} className="w-full py-2.5 rounded-xl bg-core-blue text-white text-sm font-semibold hover:bg-blue-700 transition-colors mb-4">
+      <button
+        onClick={calculate}
+        className="w-full py-2.5 rounded-xl bg-core-blue text-white text-sm font-semibold hover:bg-blue-700 transition-colors mb-4"
+      >
         Calculate
       </button>
       {result !== null && (
@@ -75,9 +88,9 @@ function PositionSizeCalculator() {
   const [result, setResult] = useState(null);
 
   const calculate = () => {
-  const riskAmount = (parseFloat(balance) * parseFloat(risk)) / 100;
-  const pipValue = 10;
-  const lots = riskAmount / (parseFloat(stopLoss) * pipValue);
+    const riskAmount = (parseFloat(balance) * parseFloat(risk)) / 100;
+    const pipValue = 10;
+    const lots = riskAmount / (parseFloat(stopLoss) * pipValue);
     setResult(isNaN(lots) ? null : lots.toFixed(2));
   };
 
@@ -92,28 +105,51 @@ function PositionSizeCalculator() {
       <div className="space-y-3 mb-5">
         <div>
           <label className="block text-xs font-semibold text-core-muted mb-1.5">Account Balance (USD)</label>
-          <input type="number" value={balance} onChange={(e) => setBalance(e.target.value)} placeholder="10000"
-            className="w-full px-3 py-2.5 rounded-xl border border-core-line bg-core-soft text-sm text-core-ink focus:outline-none focus:border-core-blue focus:ring-2 focus:ring-core-blue/15 transition" />
+          <input
+            type="number"
+            value={balance}
+            onChange={(e) => setBalance(e.target.value)}
+            placeholder="10000"
+            className="w-full px-3 py-2.5 rounded-xl border border-core-line bg-core-soft text-sm text-core-ink focus:outline-none focus:border-core-blue focus:ring-2 focus:ring-core-blue/15 transition"
+          />
         </div>
         <div>
           <label className="block text-xs font-semibold text-core-muted mb-1.5">Risk Percentage (%)</label>
-          <input type="number" value={risk} onChange={(e) => setRisk(e.target.value)} placeholder="1"
-            className="w-full px-3 py-2.5 rounded-xl border border-core-line bg-core-soft text-sm text-core-ink focus:outline-none focus:border-core-blue focus:ring-2 focus:ring-core-blue/15 transition" />
+          <input
+            type="number"
+            value={risk}
+            onChange={(e) => setRisk(e.target.value)}
+            placeholder="1"
+            className="w-full px-3 py-2.5 rounded-xl border border-core-line bg-core-soft text-sm text-core-ink focus:outline-none focus:border-core-blue focus:ring-2 focus:ring-core-blue/15 transition"
+          />
         </div>
         <div>
           <label className="block text-xs font-semibold text-core-muted mb-1.5">Stop Loss (Pips)</label>
-          <input type="number" value={stopLoss} onChange={(e) => setStopLoss(e.target.value)} placeholder="20"
-            className="w-full px-3 py-2.5 rounded-xl border border-core-line bg-core-soft text-sm text-core-ink focus:outline-none focus:border-core-blue focus:ring-2 focus:ring-core-blue/15 transition" />
+          <input
+            type="number"
+            value={stopLoss}
+            onChange={(e) => setStopLoss(e.target.value)}
+            placeholder="20"
+            className="w-full px-3 py-2.5 rounded-xl border border-core-line bg-core-soft text-sm text-core-ink focus:outline-none focus:border-core-blue focus:ring-2 focus:ring-core-blue/15 transition"
+          />
         </div>
         <div>
           <label className="block text-xs font-semibold text-core-muted mb-1.5">Currency Pair</label>
-          <select value={pair} onChange={(e) => setPair(e.target.value)}
-            className="w-full px-3 py-2.5 rounded-xl border border-core-line bg-core-soft text-sm text-core-ink focus:outline-none focus:border-core-blue focus:ring-2 focus:ring-core-blue/15 transition">
-            {["EUR/USD", "GBP/USD", "USD/JPY"].map((p) => <option key={p}>{p}</option>)}
+          <select
+            value={pair}
+            onChange={(e) => setPair(e.target.value)}
+            className="w-full px-3 py-2.5 rounded-xl border border-core-line bg-core-soft text-sm text-core-ink focus:outline-none focus:border-core-blue focus:ring-2 focus:ring-core-blue/15 transition"
+          >
+            {["EUR/USD", "GBP/USD", "USD/JPY"].map((p) => (
+              <option key={p}>{p}</option>
+            ))}
           </select>
         </div>
       </div>
-      <button onClick={calculate} className="w-full py-2.5 rounded-xl bg-core-teal text-white text-sm font-semibold hover:bg-teal-700 transition-colors mb-4">
+      <button
+        onClick={calculate}
+        className="w-full py-2.5 rounded-xl bg-core-teal text-white text-sm font-semibold hover:bg-teal-700 transition-colors mb-4"
+      >
         Calculate
       </button>
       {result !== null && (
@@ -136,7 +172,9 @@ function RiskRewardCalculator() {
   const [result, setResult] = useState(null);
 
   const calculate = () => {
-    const e = parseFloat(entry), s = parseFloat(stop), t = parseFloat(target);
+    const e = parseFloat(entry),
+      s = parseFloat(stop),
+      t = parseFloat(target);
     if (isNaN(e) || isNaN(s) || isNaN(t)) return;
     const risk = Math.abs(e - s);
     const reward = Math.abs(t - e);
@@ -160,12 +198,21 @@ function RiskRewardCalculator() {
         ].map(({ label, val, set, ph }) => (
           <div key={label}>
             <label className="block text-xs font-semibold text-core-muted mb-1.5">{label}</label>
-            <input type="number" value={val} onChange={(e) => set(e.target.value)} placeholder={ph} step="0.0001"
-              className="w-full px-3 py-2.5 rounded-xl border border-core-line bg-core-soft text-sm text-core-ink focus:outline-none focus:border-core-blue focus:ring-2 focus:ring-core-blue/15 transition" />
+            <input
+              type="number"
+              value={val}
+              onChange={(e) => set(e.target.value)}
+              placeholder={ph}
+              step="0.0001"
+              className="w-full px-3 py-2.5 rounded-xl border border-core-line bg-core-soft text-sm text-core-ink focus:outline-none focus:border-core-blue focus:ring-2 focus:ring-core-blue/15 transition"
+            />
           </div>
         ))}
       </div>
-      <button onClick={calculate} className="w-full py-2.5 rounded-xl bg-core-green text-white text-sm font-semibold hover:bg-green-700 transition-colors mb-4">
+      <button
+        onClick={calculate}
+        className="w-full py-2.5 rounded-xl bg-core-green text-white text-sm font-semibold hover:bg-green-700 transition-colors mb-4"
+      >
         Calculate
       </button>
       {result && (
@@ -210,7 +257,10 @@ export default function Tools() {
               { icon: "ph:trend-up", label: "Risk/Reward", color: "text-core-green", bg: "bg-core-mint" },
               { icon: "ph:notebook", label: "Trading Journal", color: "text-core-gold", bg: "bg-core-amber" },
             ].map(({ icon, label, color, bg }) => (
-              <div key={label} className="flex flex-col items-center gap-2 p-4 bg-core-soft rounded-2xl border border-core-line hover:bg-white hover:border-blue-200 hover:shadow-sm transition-all cursor-pointer">
+              <div
+                key={label}
+                className="flex flex-col items-center gap-2 p-4 bg-core-soft rounded-2xl border border-core-line hover:bg-white hover:border-blue-200 hover:shadow-sm transition-all cursor-pointer"
+              >
                 <div className={`w-10 h-10 rounded-xl ${bg} flex items-center justify-center`}>
                   <Icon icon={icon} className={`${color} text-xl`} />
                 </div>
@@ -261,7 +311,12 @@ export default function Tools() {
                 <thead>
                   <tr className="border-b border-core-line bg-core-soft">
                     {["Date", "Pair", "Direction", "Entry", "Exit", "Pips", "Result", "Notes"].map((h) => (
-                      <th key={h} className="px-4 py-3 text-left text-xs font-semibold text-core-muted whitespace-nowrap">{h}</th>
+                      <th
+                        key={h}
+                        className="px-4 py-3 text-left text-xs font-semibold text-core-muted whitespace-nowrap"
+                      >
+                        {h}
+                      </th>
                     ))}
                   </tr>
                 </thead>
@@ -271,25 +326,33 @@ export default function Tools() {
                       <td className="px-4 py-3 text-xs text-core-muted">{entry.date}</td>
                       <td className="px-4 py-3 text-xs font-bold text-core-ink">{entry.pair}</td>
                       <td className="px-4 py-3">
-                        <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${entry.direction === "Buy" ? "bg-core-mint text-core-green" : "bg-red-50 text-core-red"}`}>
+                        <span
+                          className={`text-xs font-semibold px-2 py-0.5 rounded-full ${entry.direction === "Buy" ? "bg-core-mint text-core-green" : "bg-red-50 text-core-red"}`}
+                        >
                           {entry.direction}
                         </span>
                       </td>
                       <td className="px-4 py-3 text-xs text-core-muted">{entry.entry}</td>
                       <td className="px-4 py-3 text-xs text-core-muted">{entry.exit}</td>
-                      <td className={`px-4 py-3 text-xs font-bold ${entry.pips.startsWith("+") ? "text-core-green" : entry.pips === "0" ? "text-core-muted" : "text-core-red"}`}>
+                      <td
+                        className={`px-4 py-3 text-xs font-bold ${entry.pips.startsWith("+") ? "text-core-green" : entry.pips === "0" ? "text-core-muted" : "text-core-red"}`}
+                      >
                         {entry.pips}
                       </td>
                       <td className="px-4 py-3">
-                        <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${
-                          entry.result === "Win" ? "bg-core-mint text-core-green" :
-                          entry.result === "Loss" ? "bg-red-50 text-core-red" :
-                          "bg-core-soft text-core-muted"
-                        }`}>
+                        <span
+                          className={`text-xs font-semibold px-2 py-0.5 rounded-full ${
+                            entry.result === "Win"
+                              ? "bg-core-mint text-core-green"
+                              : entry.result === "Loss"
+                                ? "bg-red-50 text-core-red"
+                                : "bg-core-soft text-core-muted"
+                          }`}
+                        >
                           {entry.result}
                         </span>
                       </td>
-                      <td className="px-4 py-3 text-xs text-core-muted max-w-[200px]">{entry.notes}</td>
+                      <td className="px-4 py-3 text-xs text-core-muted max-w-50">{entry.notes}</td>
                     </tr>
                   ))}
                 </tbody>

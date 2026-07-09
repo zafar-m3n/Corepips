@@ -12,7 +12,7 @@ import { useStaggerReveal } from "../hooks/useAnimation";
 const biasColors = {
   "Cautious Bearish": "text-core-red bg-red-50 border-red-100",
   "Cautious Bullish": "text-core-green bg-core-mint border-green-100",
-  "Neutral": "text-core-muted bg-core-soft border-core-line",
+  Neutral: "text-core-muted bg-core-soft border-core-line",
 };
 
 export default function Markets() {
@@ -31,11 +31,13 @@ export default function Markets() {
       {/* Weekly Outlook */}
       <section className="py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-br from-core-navy to-blue-900 rounded-2xl p-6 md:p-8 text-white relative overflow-hidden">
+          <div className="bg-linear-to-br from-core-navy to-blue-900 rounded-2xl p-6 md:p-8 text-white relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-white/5 blur-2xl pointer-events-none" />
             <div className="relative">
               <div className="flex items-center gap-2 mb-4">
-                <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-white/15 text-white">Weekly Outlook</span>
+                <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-white/15 text-white">
+                  Weekly Outlook
+                </span>
               </div>
               <h2 className="font-serif text-2xl md:text-3xl text-white mb-3">This Week in the Markets</h2>
               <p className="text-white/75 text-sm leading-relaxed mb-6 max-w-2xl">{weeklyOutlook.summary}</p>
@@ -52,10 +54,14 @@ export default function Markets() {
                   </ul>
                 </div>
                 <div>
-                  <p className="text-xs font-semibold text-white/60 mb-2 uppercase tracking-wider">Currencies to Watch</p>
+                  <p className="text-xs font-semibold text-white/60 mb-2 uppercase tracking-wider">
+                    Currencies to Watch
+                  </p>
                   <div className="flex flex-wrap gap-2">
                     {weeklyOutlook.currenciesToWatch.map((c) => (
-                      <span key={c} className="text-xs px-3 py-1 rounded-full bg-white/15 text-white font-medium">{c}</span>
+                      <span key={c} className="text-xs px-3 py-1 rounded-full bg-white/15 text-white font-medium">
+                        {c}
+                      </span>
                     ))}
                   </div>
                 </div>
@@ -99,9 +105,14 @@ export default function Markets() {
           />
           <div ref={watchlistRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {currencyWatchlist.map((item) => (
-              <div key={item.pair} className="bg-white rounded-2xl border border-core-line p-5 shadow-sm hover:shadow-md hover:border-blue-200 transition-all">
+              <div
+                key={item.pair}
+                className="bg-white rounded-2xl border border-core-line p-5 shadow-sm hover:shadow-md hover:border-blue-200 transition-all"
+              >
                 <p className="text-lg font-bold text-core-ink mb-2">{item.pair}</p>
-                <span className={`text-xs font-semibold px-2.5 py-1 rounded-full border ${biasColors[item.bias] || biasColors.Neutral}`}>
+                <span
+                  className={`text-xs font-semibold px-2.5 py-1 rounded-full border ${biasColors[item.bias] || biasColors.Neutral}`}
+                >
                   {item.bias}
                 </span>
                 <div className="mt-3 pt-3 border-t border-core-line">
@@ -128,10 +139,26 @@ export default function Markets() {
           {/* Calendar explanation cards */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
             {[
-              { icon: "ph:calendar-blank", title: "What is it?", desc: "A schedule of economic data releases and central bank events." },
-              { icon: "ph:eye", title: "Why traders watch it", desc: "Economic events can cause sudden volatility in currency prices." },
-              { icon: "ph:chart-line-up", title: "Forecast vs Actual", desc: "When actual data beats forecasts, currencies often react strongly." },
-              { icon: "ph:warning", title: "High-impact events", desc: "High-impact events like NFP or rate decisions create the biggest moves." },
+              {
+                icon: "ph:calendar-blank",
+                title: "What is it?",
+                desc: "A schedule of economic data releases and central bank events.",
+              },
+              {
+                icon: "ph:eye",
+                title: "Why traders watch it",
+                desc: "Economic events can cause sudden volatility in currency prices.",
+              },
+              {
+                icon: "ph:chart-line-up",
+                title: "Forecast vs Actual",
+                desc: "When actual data beats forecasts, currencies often react strongly.",
+              },
+              {
+                icon: "ph:warning",
+                title: "High-impact events",
+                desc: "High-impact events like NFP or rate decisions create the biggest moves.",
+              },
             ].map((item) => (
               <div key={item.title} className="bg-white rounded-xl border border-core-line p-4 shadow-sm">
                 <Icon icon={item.icon} className="text-core-blue text-xl mb-2" />
@@ -148,7 +175,12 @@ export default function Markets() {
                 <thead>
                   <tr className="border-b border-core-line bg-core-soft">
                     {["Time", "Currency", "Event", "Impact", "Previous", "Forecast", "Actual"].map((h) => (
-                      <th key={h} className="px-4 py-3 text-left text-xs font-semibold text-core-muted whitespace-nowrap">{h}</th>
+                      <th
+                        key={h}
+                        className="px-4 py-3 text-left text-xs font-semibold text-core-muted whitespace-nowrap"
+                      >
+                        {h}
+                      </th>
                     ))}
                   </tr>
                 </thead>
@@ -161,7 +193,7 @@ export default function Markets() {
                           <span className="text-xs font-bold text-core-ink">{ev.currency}</span>
                         </td>
                         <td className="px-4 py-3">
-                          <p className="text-xs font-medium text-core-ink leading-snug max-w-[200px]">{ev.event}</p>
+                          <p className="text-xs font-medium text-core-ink leading-snug max-w-50">{ev.event}</p>
                         </td>
                         <td className="px-4 py-3">
                           <ImpactBadge level={ev.impact} />
