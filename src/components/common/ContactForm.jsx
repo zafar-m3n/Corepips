@@ -1,7 +1,10 @@
+// src/components/ContactForm.jsx
+
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
+import { getStoredAdTrackingData, clearStoredAdTrackingData } from "@/lib/adTracking";
 
 const WEB3FORMS_ACCESS_KEY = "417feb7c-1792-445b-a650-48289a7d2a3c";
 
@@ -160,6 +163,8 @@ function ContactForm({ icon, title, subheading, buttonText }) {
     isSubmittingRef.current = true;
     setIsSubmitting(true);
 
+    const adTrackingData = getStoredAdTrackingData();
+
     const payload = {
       access_key: WEB3FORMS_ACCESS_KEY,
       subject: "New CorePips Contact Form Submission",
@@ -169,6 +174,9 @@ function ContactForm({ icon, title, subheading, buttonText }) {
       trading_experience: formData.tradingExperience,
       phone: formData.phone,
       botcheck: formData.botcheck,
+      lp_gclid: adTrackingData.gclid,
+      lp_keyword: adTrackingData.keyword,
+      lp_location: adTrackingData.location,
     };
 
     try {
@@ -191,6 +199,8 @@ function ContactForm({ icon, title, subheading, buttonText }) {
           phone: "",
           botcheck: "",
         });
+
+        clearStoredAdTrackingData();
 
         navigate("/thank-you", { state: { fromContactForm: true } });
         return;

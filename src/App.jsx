@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
@@ -10,8 +11,13 @@ import About from "./pages/About";
 import ThankYou from "./pages/ThankYou";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsAndConditions from "./pages/TermsAndConditions";
+import { captureAdTrackingData } from "./lib/adTracking";
 
 export default function App() {
+  useEffect(() => {
+    captureAdTrackingData();
+  }, []);
+
   return (
     <BrowserRouter>
       <div className="flex flex-col min-h-screen font-sans bg-core-bg text-core-ink antialiased">
