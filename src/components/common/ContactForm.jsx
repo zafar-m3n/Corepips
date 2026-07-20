@@ -5,8 +5,7 @@ import { createPortal } from "react-dom";
 import { useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import { getStoredAdTrackingData, clearStoredAdTrackingData } from "@/lib/adTracking";
-
-const WEB3FORMS_ACCESS_KEY = "417feb7c-1792-445b-a650-48289a7d2a3c";
+import api from "@/lib/api";
 
 function Toast({ toast, onClose }) {
   if (!toast.show) return null;
@@ -166,32 +165,20 @@ function ContactForm({ icon, title, subheading, buttonText }) {
     const adTrackingData = getStoredAdTrackingData();
 
     const payload = {
-      access_key: WEB3FORMS_ACCESS_KEY,
-      subject: "New CorePips Contact Form Submission",
-      from_name: "CorePips Website",
       name: formData.name,
       email: formData.email,
-      trading_experience: formData.tradingExperience,
       phone: formData.phone,
+      trading_experience: formData.tradingExperience,
+      gclid: adTrackingData.gclid,
+      keyword: adTrackingData.keyword,
+      location: adTrackingData.location,
       botcheck: formData.botcheck,
-      lp_gclid: adTrackingData.gclid,
-      lp_keyword: adTrackingData.keyword,
-      lp_location: adTrackingData.location,
     };
 
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
+      const response = await api.post("/api/v1/contact", payload);
 
-      const result = await response.json();
-
-      if (result.success) {
+      if (response.data.code === "OK") {
         setFormData({
           name: "",
           email: "",
@@ -205,10 +192,11 @@ function ContactForm({ icon, title, subheading, buttonText }) {
         navigate("/thank-you", { state: { fromContactForm: true } });
         return;
       }
-
-      showToast("error", result.message || "Something went wrong. Please try again.");
     } catch (error) {
-      showToast("error", "Unable to send your message right now. Please try again later.");
+      showToast(
+        "error",
+        error.response?.data?.error || "Unable to send your message right now. Please try again later.",
+      );
     } finally {
       isSubmittingRef.current = false;
       setIsSubmitting(false);
