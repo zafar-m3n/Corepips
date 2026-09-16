@@ -4,6 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
+import Select from "react-select";
+import { PhoneInput } from "react-international-phone";
+import libphonenumber from "google-libphonenumber";
+import "react-international-phone/style.css";
 import { getStoredAdTrackingData, clearStoredAdTrackingData } from "@/lib/adTracking";
 import api from "@/lib/api";
 
@@ -51,12 +55,78 @@ function Toast({ toast, onClose }) {
   );
 }
 
+const TRADING_EXPERIENCE_OPTIONS = [
+  { value: "Beginner", label: "Beginner" },
+  { value: "Intermediate", label: "Intermediate" },
+  { value: "Expert", label: "Expert" },
+];
+
+const selectStyles = {
+  control: (base, state) => ({
+    ...base,
+    minHeight: "3rem",
+    height: "3rem",
+    borderRadius: "0.75rem",
+    borderColor: state.isFocused ? "var(--color-core-blue)" : "var(--color-core-line)",
+    backgroundColor: "#fff",
+    boxShadow: state.isFocused ? "0 0 0 4px rgb(219 234 254)" : "none",
+    "&:hover": {
+      borderColor: state.isFocused ? "var(--color-core-blue)" : "var(--color-core-line)",
+    },
+  }),
+  valueContainer: (base) => ({
+    ...base,
+    padding: "0 1rem",
+  }),
+  input: (base) => ({
+    ...base,
+    margin: 0,
+    padding: 0,
+    color: "var(--color-core-ink)",
+    fontSize: "0.875rem",
+  }),
+  placeholder: (base) => ({
+    ...base,
+    color: "var(--color-core-muted)",
+    fontSize: "0.875rem",
+  }),
+  singleValue: (base) => ({
+    ...base,
+    color: "var(--color-core-ink)",
+    fontSize: "0.875rem",
+  }),
+  indicatorSeparator: () => ({ display: "none" }),
+  dropdownIndicator: (base) => ({
+    ...base,
+    color: "var(--color-core-muted)",
+  }),
+  menu: (base) => ({
+    ...base,
+    borderRadius: "0.75rem",
+    overflow: "hidden",
+    border: "1px solid var(--color-core-line)",
+    boxShadow: "0 10px 15px -3px rgb(0 0 0 / 0.1)",
+    zIndex: 20,
+  }),
+  option: (base, state) => ({
+    ...base,
+    fontSize: "0.875rem",
+    backgroundColor: state.isSelected
+      ? "var(--color-core-blue)"
+      : state.isFocused
+        ? "var(--color-core-sky)"
+        : "#fff",
+    color: state.isSelected ? "#fff" : "var(--color-core-ink)",
+  }),
+};
+
 function ContactForm({ icon, title, subheading, buttonText }) {
   const navigate = useNavigate();
 
   const toastTimerRef = useRef(null);
   const toastAnimationRef = useRef(null);
   const isSubmittingRef = useRef(false);
+  const phoneUtil = useRef(libphonenumber.PhoneNumberUtil.getInstance());
 
   const [formData, setFormData] = useState({
     name: "",
@@ -66,7 +136,9 @@ function ContactForm({ icon, title, subheading, buttonText }) {
     botcheck: "",
   });
 
+  const [phoneError, setPhoneError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [defaultCountry, setDefaultCountry] = useState("gb");
 
   const [toast, setToast] = useState({
     show: false,
@@ -84,6 +156,30 @@ function ContactForm({ icon, title, subheading, buttonText }) {
       if (toastAnimationRef.current) {
         clearTimeout(toastAnimationRef.current);
       }
+    };
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function detectCountry() {
+      try {
+        const response = await fetch("https://ipapi.co/json/");
+        const data = await response.json();
+        const countryCode = data?.country_code?.toLowerCase();
+
+        if (!cancelled && countryCode) {
+          setDefaultCountry(countryCode);
+        }
+      } catch {
+        // Silently keep the "gb" fallback.
+      }
+    }
+
+    detectCountry();
+
+    return () => {
+      cancelled = true;
     };
   }, []);
 
@@ -142,6 +238,21 @@ function ContactForm({ icon, title, subheading, buttonText }) {
     }));
   }
 
+  function handleTradingExperienceChange(selectedOption) {
+    setFormData((prev) => ({
+      ...prev,
+      tradingExperience: selectedOption ? selectedOption.value : "",
+    }));
+  }
+
+  function handlePhoneChange(value) {
+    setFormData((prev) => ({
+      ...prev,
+      phone: value,
+    }));
+    setPhoneError("");
+  }
+
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -159,6 +270,20 @@ function ContactForm({ icon, title, subheading, buttonText }) {
       return;
     }
 
+    try {
+      const parsedNumber = phoneUtil.current.parseAndKeepRawInput(formData.phone);
+      if (!phoneUtil.current.isValidNumber(parsedNumber)) {
+        setPhoneError("Invalid phone number");
+        showToast("error", "Please enter a valid phone number.");
+        return;
+      }
+    } catch {
+      setPhoneError("Invalid phone number");
+      showToast("error", "Please enter a valid phone number.");
+      return;
+    }
+
+    setPhoneError("");
     isSubmittingRef.current = true;
     setIsSubmitting(true);
 
@@ -270,16 +395,20 @@ function ContactForm({ icon, title, subheading, buttonText }) {
               Phone Number
             </label>
 
-            <input
-              id="phone"
-              type="tel"
-              name="phone"
+            <PhoneInput
+              key={defaultCountry}
+              defaultCountry={defaultCountry}
               value={formData.phone}
-              onChange={handleChange}
-              placeholder="Enter your phone number"
-              autoComplete="tel"
-              className="w-full h-12 rounded-xl border border-core-line bg-white px-4 text-sm text-core-ink placeholder:text-core-muted outline-none transition-all focus:border-core-blue focus:ring-4 focus:ring-blue-100"
+              onChange={handlePhoneChange}
+              inputProps={{
+                id: "phone",
+                name: "phone",
+                autoComplete: "tel",
+              }}
+              className="w-full"
             />
+
+            {phoneError && <p className="text-red-500 text-sm mt-1">{phoneError}</p>}
           </div>
 
           <div>
@@ -287,25 +416,19 @@ function ContactForm({ icon, title, subheading, buttonText }) {
               What is your trading experience?
             </label>
 
-            <div className="relative">
-              <select
-                id="tradingExperience"
-                name="tradingExperience"
-                value={formData.tradingExperience}
-                onChange={handleChange}
-                className="w-full h-12 appearance-none rounded-xl border border-core-line bg-white px-4 pr-10 text-sm text-core-ink outline-none transition-all focus:border-core-blue focus:ring-4 focus:ring-blue-100"
-              >
-                <option value="">Select your experience level</option>
-                <option value="Beginner">Beginner</option>
-                <option value="Intermediate">Intermediate</option>
-                <option value="Expert">Expert</option>
-              </select>
-
-              <Icon
-                icon="ph:caret-down"
-                className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-core-muted text-base"
-              />
-            </div>
+            <Select
+              inputId="tradingExperience"
+              name="tradingExperience"
+              value={
+                TRADING_EXPERIENCE_OPTIONS.find((option) => option.value === formData.tradingExperience) || null
+              }
+              onChange={handleTradingExperienceChange}
+              options={TRADING_EXPERIENCE_OPTIONS}
+              placeholder="Select your experience level"
+              isSearchable={false}
+              styles={selectStyles}
+              classNamePrefix="react-select"
+            />
           </div>
 
           <button

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Icon } from "@iconify/react";
+import Select from "react-select";
 import PageHero from "../components/common/PageHero";
 import SectionHeading from "../components/common/SectionHeading";
 import DisclaimerBanner from "../components/common/DisclaimerBanner";
@@ -7,6 +8,65 @@ import CTASection from "../components/common/CTASection";
 import BackgroundEffects from "../components/layout/BackgroundEffects";
 import { journalEntries } from "../data/about";
 import { useStaggerReveal } from "../hooks/useAnimation";
+
+const currencySelectStyles = {
+  control: (base, state) => ({
+    ...base,
+    minHeight: "2.625rem",
+    borderRadius: "0.75rem",
+    borderColor: state.isFocused ? "var(--color-core-blue)" : "var(--color-core-line)",
+    backgroundColor: "var(--color-core-soft)",
+    boxShadow: state.isFocused ? "0 0 0 2px rgb(37 99 235 / 0.15)" : "none",
+    "&:hover": {
+      borderColor: state.isFocused ? "var(--color-core-blue)" : "var(--color-core-line)",
+    },
+  }),
+  valueContainer: (base) => ({
+    ...base,
+    padding: "0 0.75rem",
+  }),
+  input: (base) => ({
+    ...base,
+    margin: 0,
+    padding: 0,
+    color: "var(--color-core-ink)",
+    fontSize: "0.875rem",
+  }),
+  placeholder: (base) => ({
+    ...base,
+    color: "var(--color-core-muted)",
+    fontSize: "0.875rem",
+  }),
+  singleValue: (base) => ({
+    ...base,
+    color: "var(--color-core-ink)",
+    fontSize: "0.875rem",
+  }),
+  indicatorSeparator: () => ({ display: "none" }),
+  dropdownIndicator: (base) => ({
+    ...base,
+    color: "var(--color-core-muted)",
+    padding: "0 0.5rem",
+  }),
+  menu: (base) => ({
+    ...base,
+    borderRadius: "0.75rem",
+    overflow: "hidden",
+    border: "1px solid var(--color-core-line)",
+    boxShadow: "0 10px 15px -3px rgb(0 0 0 / 0.1)",
+    zIndex: 20,
+  }),
+  option: (base, state) => ({
+    ...base,
+    fontSize: "0.875rem",
+    backgroundColor: state.isSelected
+      ? "var(--color-core-blue)"
+      : state.isFocused
+        ? "var(--color-core-sky)"
+        : "#fff",
+    color: state.isSelected ? "#fff" : "var(--color-core-ink)",
+  }),
+};
 
 function PipCalculator() {
   const [pair, setPair] = useState("EUR/USD");
@@ -33,15 +93,14 @@ function PipCalculator() {
       <div className="space-y-3 mb-5">
         <div>
           <label className="block text-xs font-semibold text-core-muted mb-1.5">Currency Pair</label>
-          <select
-            value={pair}
-            onChange={(e) => setPair(e.target.value)}
-            className="w-full px-3 py-2.5 rounded-xl border border-core-line bg-core-soft text-sm text-core-ink focus:outline-none focus:border-core-blue focus:ring-2 focus:ring-core-blue/15 transition"
-          >
-            {["EUR/USD", "GBP/USD", "USD/JPY", "XAU/USD"].map((p) => (
-              <option key={p}>{p}</option>
-            ))}
-          </select>
+          <Select
+            value={{ value: pair, label: pair }}
+            onChange={(selectedOption) => setPair(selectedOption.value)}
+            options={["EUR/USD", "GBP/USD", "USD/JPY", "XAU/USD"].map((p) => ({ value: p, label: p }))}
+            isSearchable={false}
+            styles={currencySelectStyles}
+            classNamePrefix="react-select"
+          />
         </div>
         <div>
           <label className="block text-xs font-semibold text-core-muted mb-1.5">Lot Size</label>
@@ -135,15 +194,14 @@ function PositionSizeCalculator() {
         </div>
         <div>
           <label className="block text-xs font-semibold text-core-muted mb-1.5">Currency Pair</label>
-          <select
-            value={pair}
-            onChange={(e) => setPair(e.target.value)}
-            className="w-full px-3 py-2.5 rounded-xl border border-core-line bg-core-soft text-sm text-core-ink focus:outline-none focus:border-core-blue focus:ring-2 focus:ring-core-blue/15 transition"
-          >
-            {["EUR/USD", "GBP/USD", "USD/JPY"].map((p) => (
-              <option key={p}>{p}</option>
-            ))}
-          </select>
+          <Select
+            value={{ value: pair, label: pair }}
+            onChange={(selectedOption) => setPair(selectedOption.value)}
+            options={["EUR/USD", "GBP/USD", "USD/JPY"].map((p) => ({ value: p, label: p }))}
+            isSearchable={false}
+            styles={currencySelectStyles}
+            classNamePrefix="react-select"
+          />
         </div>
       </div>
       <button
