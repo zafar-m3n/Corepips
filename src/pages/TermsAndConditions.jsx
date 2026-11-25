@@ -49,6 +49,14 @@ const termsSections = [
   },
   {
     number: "03",
+    icon: "ph:buildings",
+    title: "Partner brokers",
+    description:
+      "CorePips provides trading education and tools. We are not a broker and do not hold client funds. Any trading account you open is with a third-party broker, under that broker's own terms and regulation. Trading forex and CFDs carries a high risk of losing money.",
+    items: [],
+  },
+  {
+    number: "04",
     icon: "ph:handshake",
     title: "User Conduct",
     description: "By using this site, you agree to use the content only for personal, non-commercial learning.",
@@ -64,7 +72,7 @@ const termsSections = [
     ],
   },
   {
-    number: "04",
+    number: "05",
     icon: "ph:prohibit",
     title: "Limitation of Liability",
     description:
@@ -81,7 +89,7 @@ const termsSections = [
     ],
   },
   {
-    number: "05",
+    number: "06",
     icon: "ph:gear-six",
     title: "Modifications to Service",
     description:
@@ -131,7 +139,7 @@ function TermsAndConditions() {
       >
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-core-line text-core-muted text-xs font-semibold shadow-sm">
           <Icon icon="ph:calendar-blank" className="text-core-blue text-sm" />
-          Last Updated: June 2026
+          Last Updated: November 2026
         </div>
       </PageHero>
 

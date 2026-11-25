@@ -15,7 +15,7 @@ const privacySections = [
     items: [
       {
         label: "Voluntary Information",
-        text: "When you subscribe to our educational newsletter or request market analysis updates, we collect your email address and your name.",
+        text: "When you fill in a form on our website, we collect your name, email address, phone number and trading experience level.",
       },
       {
         label: "Automatically Collected Information",
@@ -80,11 +80,17 @@ const privacySections = [
         text: "Send you daily or weekly market analysis, newsletter updates, and educational resources.",
       },
     ],
-    highlight:
-      "We strictly do not sell, rent, or share your personal data with third-party brokers or unlicensed platforms.",
   },
   {
     number: "05",
+    icon: "ph:users-three",
+    title: "Sharing your information with partners",
+    description:
+      "When you submit a form on our website and give consent, we may share your name, email address and phone number with our partner brokers. They may contact you about opening a trading account. You can withdraw consent at any time by emailing support@corepips.com, and we will stop sharing your details from that point.",
+    items: [],
+  },
+  {
+    number: "06",
     icon: "ph:handshake",
     title: "Third-Party Privacy Policies",
     description: "CorePips’ Privacy Policy does not apply to other advertisers, platforms, or websites.",
@@ -96,7 +102,7 @@ const privacySections = [
     ],
   },
   {
-    number: "06",
+    number: "07",
     icon: "ph:scales",
     title: "Data Protection Rights",
     description: "We want to make sure you are fully aware of your data protection rights.",
@@ -116,7 +122,7 @@ const privacySections = [
     ],
   },
   {
-    number: "07",
+    number: "08",
     icon: "ph:check-circle",
     title: "Consent",
     description:
@@ -136,11 +142,6 @@ const quickSummary = [
     title: "Email control",
     text: "You can unsubscribe from educational emails whenever you want.",
   },
-  {
-    icon: "ph:prohibit",
-    title: "No broker selling",
-    text: "We do not sell your personal data to brokers or unlicensed platforms.",
-  },
 ];
 
 function PrivacyPolicy() {
@@ -157,7 +158,7 @@ function PrivacyPolicy() {
       >
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-core-line text-core-muted text-xs font-semibold shadow-sm">
           <Icon icon="ph:calendar-blank" className="text-core-blue text-sm" />
-          Last Updated: June 2026
+          Last Updated: November 2026
         </div>
       </PageHero>
 
@@ -204,7 +205,7 @@ function PrivacyPolicy() {
             center
           />
 
-          <div ref={summaryRef} className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div ref={summaryRef} className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl mx-auto">
             {quickSummary.map((item) => (
               <div
                 key={item.title}

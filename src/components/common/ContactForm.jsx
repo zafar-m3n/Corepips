@@ -120,6 +120,16 @@ const selectStyles = {
   }),
 };
 
+const INITIAL_FORM_DATA = {
+  name: "",
+  email: "",
+  tradingExperience: "",
+  phone: "",
+  botcheck: "",
+  consent: false,
+  consentAt: "",
+};
+
 function ContactForm({ icon, title, subheading, buttonText }) {
   const navigate = useNavigate();
 
@@ -128,13 +138,7 @@ function ContactForm({ icon, title, subheading, buttonText }) {
   const isSubmittingRef = useRef(false);
   const phoneUtil = useRef(libphonenumber.PhoneNumberUtil.getInstance());
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    tradingExperience: "",
-    phone: "",
-    botcheck: "",
-  });
+  const [formData, setFormData] = useState(INITIAL_FORM_DATA);
 
   const [phoneError, setPhoneError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -238,6 +242,16 @@ function ContactForm({ icon, title, subheading, buttonText }) {
     }));
   }
 
+  function handleConsentChange(event) {
+    const { checked } = event.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      consent: checked,
+      consentAt: checked ? new Date().toISOString() : "",
+    }));
+  }
+
   function handleTradingExperienceChange(selectedOption) {
     setFormData((prev) => ({
       ...prev,
@@ -270,6 +284,11 @@ function ContactForm({ icon, title, subheading, buttonText }) {
       return;
     }
 
+    if (!formData.consent) {
+      showToast("error", "Please tick the consent box before submitting.");
+      return;
+    }
+
     try {
       const parsedNumber = phoneUtil.current.parseAndKeepRawInput(formData.phone);
       if (!phoneUtil.current.isValidNumber(parsedNumber)) {
@@ -298,19 +317,16 @@ function ContactForm({ icon, title, subheading, buttonText }) {
       keyword: adTrackingData.keyword,
       location: adTrackingData.location,
       botcheck: formData.botcheck,
+      consent: formData.consent,
+      consent_at: formData.consentAt,
+      page_url: window.location.href,
     };
 
     try {
       const response = await api.post("/api/v1/contact", payload);
 
       if (response.data.code === "OK") {
-        setFormData({
-          name: "",
-          email: "",
-          tradingExperience: "",
-          phone: "",
-          botcheck: "",
-        });
+        setFormData(INITIAL_FORM_DATA);
 
         clearStoredAdTrackingData();
 
@@ -430,6 +446,57 @@ function ContactForm({ icon, title, subheading, buttonText }) {
               classNamePrefix="react-select"
             />
           </div>
+
+          <label htmlFor="consent" className="group flex cursor-pointer items-start gap-3">
+            <input
+              id="consent"
+              type="checkbox"
+              name="consent"
+              checked={formData.consent}
+              onChange={handleConsentChange}
+              aria-required="true"
+              className="peer sr-only"
+            />
+
+            <span
+              aria-hidden="true"
+              className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md border transition-all peer-focus-visible:ring-4 peer-focus-visible:ring-blue-100 ${
+                formData.consent
+                  ? "border-core-blue bg-core-blue shadow-sm"
+                  : "border-core-line bg-white group-hover:border-core-blue"
+              }`}
+            >
+              <Icon
+                icon="ph:check-bold"
+                className={`text-xs text-white transition-all duration-150 ${
+                  formData.consent ? "scale-100 opacity-100" : "scale-50 opacity-0"
+                }`}
+              />
+            </span>
+
+            <span className="text-xs leading-relaxed text-core-muted">
+              I agree that CorePips may share my name, email and phone number with its partner brokers, who may
+              contact me about trading accounts. I have read the{" "}
+              <a
+                href="/privacy-policy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-core-blue underline hover:text-blue-700"
+              >
+                Privacy Policy
+              </a>{" "}
+              and{" "}
+              <a
+                href="/terms-and-conditions"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-core-blue underline hover:text-blue-700"
+              >
+                Terms
+              </a>
+              .
+            </span>
+          </label>
 
           <button
             type="submit"
